@@ -14,7 +14,6 @@ Strategies below increase the chance to score:
 </p>
 
 ![](https://i.imgur.com/ogMj5VT.png)
-![](https://i.imgur.com/41vOhCJ.jpg)
-![](https://i.imgur.com/iDoCypi.jpg)
+![](https://i.imgur.com/okeCoQP.jpg)
 
 Link to Hackmd : https://hackmd.io/@heidiche/By63QCVvt
