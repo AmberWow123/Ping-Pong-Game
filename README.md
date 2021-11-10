@@ -1,6 +1,9 @@
 # CSE 230 - Final Project
+
 Members: Yuka Chu, Chi-Hsuan Lee, Yi-Ting Wang, Heidi Cheng
+
 Link to Hackmd : https://hackmd.io/@heidiche/By63QCVvt
+
 ## Ping-Pong Game with a Twist
 <p>
 In this project, we are developing a two-player ping-pong game with additional feature such as smashing or spinning the ball.
