@@ -40,9 +40,9 @@ racketHeight = 5
 
 init :: PlayState
 init = PS
-  { racket1 = 5                     
-  , racket2 = 5                     
-  , ball    = Ball.initBall              
+  { racket1 = Player1                  
+  , racket2 = Player2                     
+  , ball    = Ball.init            
   , result  = (Cont ball)           
   , turn    = P1                    
   , score   = (0, 0)                

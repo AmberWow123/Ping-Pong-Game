@@ -16,6 +16,8 @@ module Model.Ball
 
 import Prelude hiding (init)
 import Control.Monad.IO.Class (MonadIO(liftIO))
+import Model
+import Model.Player
 
 
 -------------------------------------------------------------------------------
@@ -78,8 +80,8 @@ data Result a
 result :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
 result b p1 p2 = if (bx == 0) && (by > (p1+5)) || (by < (p1-5)) then Score P2
                 else if (bx == 100) && (by > (p2+5)) || (by < (p2-5)) then Score P1
-                     else if bx == 0 || bx == mx then Hit Y
-                          else if by == 0 || by == my then Hit X
+                     else if bx == 0 || bx == boardWidth then Hit Y
+                          else if by == 0 || by == boardHeight then Hit X
                                else Cont (movement b)
     where p   = pos b
           bx = x p
@@ -87,48 +89,24 @@ result b p1 p2 = if (bx == 0) && (by > (p1+5)) || (by < (p1-5)) then Score P2
 
 serveBall :: Turn -> Ball
 serveBall P1 = Ball
-  { pos   = Coord { x = mx `div`2, y = my `div` 2 }
+  { pos   = Coord { x = boardWidth `div`2, y = boardHeight `div` 2 }
   , dir   = Coord { x = -1, y = 0}
   , speed = 0.1
   }
 serveBall P2 = Ball
-  { pos   = Coord { x = mx `div`2, y = my `div` 2 }
+  { pos   = Coord { x = boardWidth `div`2, y = boardHeight `div` 2 }
   , dir   = Coord { x = 1, y = 0}
   , speed = 0.1
   }
 
 isp = 0.1
 
-initBall :: Ball
-initBall = serveBall P1
+init :: Ball
+init = serveBall P1
 
 
 --------------------------apis from other files
-data PlayState = PS
-  { racket1 :: Racket -- ^ racket on the left 
-  , racket2 :: Racket -- ^ racket on the right
-  , ball    :: Ball   -- ^ properties of the ball
-  , result'  :: Turn  -- ^ game over flag
-  , turn    :: Turn   -- ^ one of the player score, do nextServe. If end -> restart game
-  , score   :: Score  -- ^ score
-  }
 
-type Result' = Turn
 type Score = (Int, Int)
 addScore :: Score -> Turn -> Either (Turn) () -- ^ Left winner, Right current Score after increment
 addScore = undefined
-type Racket = Int
-
-mx :: Int
-mx = 100
-my:: Int
-my = 60
-
-
----------- for Model.hs
-next :: PlayState -> Result Ball -> Either (Turn) PlayState
-next s (Cont b') = Right (s { ball = b' } )
-next s (Hit pl) = Right (s { ball = reflect (ball s) pl })
-next s (Score p) = case (addScore (score s) p) of
-                         Left winner -> Left winner
-                         Right ()    -> Right (s { ball = serveBall p })
