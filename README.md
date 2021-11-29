@@ -40,6 +40,7 @@ src
 2. We divided our work into four components so that each group member could commit individually without worrying about conflicts. To do so, we first design clear APIs to let each component communicate. We have not run our code yet. We are not sure if each component will connect well with the expected features.
 
 * Do you expect to meet your goals until the deadline?
+
 We were planning to add some additional features, such as smashing and spinning the ball. However, since we have three moving objects, it is hard for us to control the three objects. Therefore, we will focus on the implementation of ball's movement and two rackets for now.
 * If not, how will you modify your goals?
 1. We will add some addtional UI features, like changing the color of the direction arrow pressed by the player. 
