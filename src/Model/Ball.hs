@@ -15,13 +15,24 @@ module Model.Ball
   where
 
 import Prelude hiding (init)
+import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
 -------------------------------------------------------------------------------
 -- | Ball ---------------------------------------------------------------------
 -------------------------------------------------------------------------------
 
-type Coord  = (Int,Int)
+data Coord = Coord
+  { x :: Int 
+  , y :: Int
+  }
+  deriving (Eq, Ord)
+
+addc :: Coord -> Coord -> Coord
+addc a b = Coord{ x = (x a) + (x b), y = (y a) + (y b)}
+
+mulc :: Coord -> Float -> Coord
+mulc a c = Coord{ x = round ((fromIntegral (x a)) * c), y = round ((fromIntegral (y a)) * c)}
 
 data Ball   = Ball
   { pos   :: Coord -- ^ position of ball
@@ -30,12 +41,11 @@ data Ball   = Ball
   }
 
 movement :: Ball -> Ball
-movement b = b { pos = (x',y') }
-           where (x,y)   = pos b
-                 (vx,vy) = dir b
-                 s       = speed b
-                 x' = x + (round (s * fromIntegral vx))
-                 y' = y + (round (s * fromIntegral vy))
+movement b = do 
+            let p = pos b
+            let v = dir b
+            let  s       = speed b
+            b { pos = (p `addc` (v `mulc` s)) }
 
 data Turn
   = P1
@@ -48,12 +58,15 @@ data Plane
   deriving (Eq, Show)
 
 reflect :: Ball -> Plane -> Ball
-reflect b X = b { dir = (vx',vy) }
-             where (vx,vy) = dir b
-                   vx' = -1 * vx
-reflect b Y = b { dir = (vx,vy') }
-             where (vx,vy) = dir b
-                   vy' = -1 * vy
+reflect b X = do 
+    let v = dir b
+    let vx' = -1 * (x v)
+    b { dir = Coord {x = vx', y = y v} }
+
+reflect b Y = do 
+    let v = dir b
+    let vy' = -1 * (y v)
+    b { dir = Coord {x = x v, y = vy'} }
 
 
 data Result a
@@ -63,27 +76,31 @@ data Result a
   deriving (Eq, Functor, Show)
 
 result :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
-result b p1 p2 = if (x == 0) && (y > (p1+5)) || (y < (p1-5)) then Score P2
-                else if (x == 100) && (y > (p2+5)) || (y < (p2-5)) then Score P1
-                     else if x == 0 || x == mx then Hit Y
-                          else if y == 0 || y == my then Hit X
+result b p1 p2 = if (bx == 0) && (by > (p1+5)) || (by < (p1-5)) then Score P2
+                else if (bx == 100) && (by > (p2+5)) || (by < (p2-5)) then Score P1
+                     else if bx == 0 || bx == mx then Hit Y
+                          else if by == 0 || by == my then Hit X
                                else Cont (movement b)
-    where (x,y)   = pos b
-
-randomBallDir :: Turn -> IO Coord
-randomBallDir = undefined
+    where p   = pos b
+          bx = x p
+          by = y p
 
 serveBall :: Turn -> Ball
-serveBall p = Ball {
-  pos = (mx `div` 2, my `div` 2)
-, dir = do{ d <- randomBallDir p; d }
-, speed = isp
-}
+serveBall P1 = Ball
+  { pos   = Coord { x = mx `div`2, y = my `div` 2 }
+  , dir   = Coord { x = -1, y = 0}
+  , speed = 0.1
+  }
+serveBall P2 = Ball
+  { pos   = Coord { x = mx `div`2, y = my `div` 2 }
+  , dir   = Coord { x = 1, y = 0}
+  , speed = 0.1
+  }
 
 isp = 0.1
 
 initBall :: Ball
-initBall = undefined
+initBall = serveBall P1
 
 
 --------------------------apis from other files
