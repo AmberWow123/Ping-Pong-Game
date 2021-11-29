@@ -54,4 +54,4 @@ next s (Cont b') = Right (s { ball = b' } )
 next s (Hit pl) = Right (s { ball = Ball.reflect (ball s) pl })
 next s (Score p) = case (Score.addScore (score s) p) of
                          Left winner -> Left winner
-                         Right ()    -> Right (s { ball = Ball.serveBall p })
+                         Right sc -> Right (s { ball = Ball.serveBall p, score = sc })

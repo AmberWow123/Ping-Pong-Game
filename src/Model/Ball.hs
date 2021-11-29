@@ -103,10 +103,3 @@ isp = 0.1
 
 init :: Ball
 init = serveBall P1
-
-
---------------------------apis from other files
-
-type Score = (Int, Int)
-addScore :: Score -> Turn -> Either (Turn) () -- ^ Left winner, Right current Score after increment
-addScore = undefined
