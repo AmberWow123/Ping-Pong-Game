@@ -30,11 +30,13 @@ drawScore (p1_score, p2_score) = withBorderStyle BS.unicodeBold
   $ padRight 1
   $ str $ (str "Player2 score") $ show p2_score
 
-drawGameOver :: Bool -> Widget n
-drawGameOver dead =
-  if dead
-     then withAttr gameOverAttr $ C.hCenter $ str "GAME OVER"
-     else emptyWidget
+drawGameOver :: (Int, Int) -> Widget n
+drawGameOver (p1_result, p2_result) =
+  if (p1_result + p2_result) > 0
+      if p1_result == 1:
+          then withAttr gameOverAttr $ C.hCenter $ str "PLAYER 1 WON"
+          else withAttr gameOverAttr $ C.hCenter $ str "PLAYER 2 WON"
 
 gameOverAttr :: AttrName
 gameOverAttr = "gameOver"
+
