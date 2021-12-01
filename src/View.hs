@@ -21,8 +21,8 @@ drawUI g = [C.center $ padTop (Pad 2) (drawStats g) <=> drawBoard g]
 
 drawStats :: PlayState -> Widget n
 drawStats g = hLimit 5
-  $ vBox [ drawScore (g ^. score)
-         , padTop (Pad 1) $ drawGameOver (g ^. result)
+  $ vBox [ drawScore (score g)
+         , padTop (Pad 1) $ drawGameOver (result g)
          ]
 
 drawScore :: (Int, Int) -> Widget n
