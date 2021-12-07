@@ -1,4 +1,5 @@
 {-# LANGUAGE RecordWildCards #-}
+
 module Model where 
 
 import Prelude hiding ((!!))
@@ -46,7 +47,6 @@ init = PS
   , turn    = P1                    
   , score   = (0, 0)                
   }
-
 
 next :: PlayState -> Ball.Result Ball.Ball -> Either (Bool) PlayState
 next s (Cont b') = Right (s { ball = b' } )

@@ -7,6 +7,7 @@ module Model.Ball
   , Result (..)
 
     -- * Ball API
+  , getIntPos
   , result
   , next
   , initBall
@@ -25,8 +26,8 @@ import Model.Player
 -------------------------------------------------------------------------------
 
 data Coord = Coord
-  { x :: Int 
-  , y :: Int
+  { x :: Float 
+  , y :: Float
   }
   deriving (Eq, Ord)
 
@@ -34,13 +35,17 @@ addc :: Coord -> Coord -> Coord
 addc a b = Coord{ x = (x a) + (x b), y = (y a) + (y b)}
 
 mulc :: Coord -> Float -> Coord
-mulc a c = Coord{ x = round ((fromIntegral (x a)) * c), y = round ((fromIntegral (y a)) * c)}
+mulc a c = Coord{ x = (x a) * c, y = (y a) * c}
 
 data Ball   = Ball
   { pos   :: Coord -- ^ position of ball
   , dir   :: Coord -- ^ direction of ball moving towards
   , speed :: Float -- ^ speed * dir = actual move
   }
+
+getIntPos :: Ball -> (Int,Int)
+getIntPos b = (round (x p), round (y p))
+            where p = pos b
 
 movement :: Ball -> Ball
 movement b = do 
@@ -79,7 +84,7 @@ data Result a
 
 result :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
 result b p1 p2 = if (bx == 0) && (by > (p1+5)) || (by < (p1-5)) then Score P2
-                else if (bx == 100) && (by > (p2+5)) || (by < (p2-5)) then Score P1
+                else if (bx == boardWidth) && (by > (p2+5)) || (by < (p2-5)) then Score P1
                      else if bx == 0 || bx == boardWidth then Hit Y
                           else if by == 0 || by == boardHeight then Hit X
                                else Cont (movement b)
