@@ -55,11 +55,3 @@ next s (Hit pl) = Right (s { ball = Ball.reflect (ball s) pl })
 next s (Score p) = case (Score.addScore (score s) p) of
                          Left winner -> Left winner
                          Right sc -> Right (s { ball = Ball.serveBall p, score = sc })
---- >>> "X"
---- (Error while loading modules for evaluation)
---- <BLANKLINE>
---- <no location info>: error:
----     module ‘main:Main’ is defined in multiple files: /home/cse230/Desktop/CSE230-FinalProject/src/Main.hs
----                                                      /home/cse230/Desktop/CSE230-FinalProject/src/View.hs
---- Failed, no modules loaded.
----
