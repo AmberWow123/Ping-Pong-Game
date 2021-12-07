@@ -21,8 +21,7 @@ data State
   | Outro 
  
 data Plane 
-  = Racket
-  | Wall
+  = Racket | Ball | Empty
 
 data PlayState = PS
   { racket1 :: Player.Racket   -- ^ racket on the left 

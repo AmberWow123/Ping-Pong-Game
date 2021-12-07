@@ -1,4 +1,3 @@
-import qualified Brick.Widgets.Border.Style as BS
 import qualified Brick.Widgets.Border as B
 import qualified Brick.Widgets.Border.Style as BS
 import qualified Brick.Widgets.Center as C
