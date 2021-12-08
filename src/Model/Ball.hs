@@ -52,11 +52,12 @@ reflect b Y = do
     b { dir = Coord {x = x v, y = vy'} }
 
 nextResult :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
-nextResult b p1 p2 = if (bx == 5) && (by < fromIntegral (p1+5)) && (by > fromIntegral (p1-5)) then Score P2
-                else if (bx == fromIntegral boardWidth - 5) && (by < fromIntegral (p2+5)) && (by > fromIntegral (p2-5)) then Score P1
-                     else if bx == 0 || bx == fromIntegral boardWidth then Hit Y
-                          else if by == 0 || by == fromIntegral boardHeight then Hit X
-                               else Cont (movement b)
+nextResult b p1 p2 = if (bx == 5) && (by < fromIntegral (p1+2)) && (by > fromIntegral (p1-2)) then Hit Y
+                     else if (bx == fromIntegral boardWidth - 5) && (by < fromIntegral (p2+2)) && (by > fromIntegral (p2-2)) then Hit Y
+                          else if bx == 0 then Score P2
+                               else if bx == fromIntegral boardWidth then Score P1
+                                    else if by == 0 || by == fromIntegral boardHeight then Hit X
+                                         else Cont (movement b)
     where p   = pos b
           bx = x p
           by = y p
