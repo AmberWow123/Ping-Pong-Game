@@ -1,5 +1,8 @@
 module Control where
 
+
+import Types
+
 import Brick hiding (Result)
 import qualified Graphics.Vty as V
 import qualified Brick.Types as T
