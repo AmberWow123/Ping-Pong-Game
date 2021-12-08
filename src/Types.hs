@@ -1,6 +1,8 @@
 {-# LANGUAGE DeriveFunctor #-}
 module Types where
 
+type Name = ()
+
 -------------------------------------------------------------------------------
 -- | Ticks mark passing of time: a custom event that we constantly stream
 -------------------------------------------------------------------------------
@@ -12,6 +14,7 @@ data Tick = Tick
 data HitPlane 
   = Racket
   | Wall
+  | Empty
 
 -------------------------------------------------------------------------------
 -- | Data for Ball
