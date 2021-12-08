@@ -23,7 +23,7 @@ drawUI :: PlayState -> [Widget Name]
 drawUI g = [C.center $ padTop (Pad 2) (drawStats g) <=> drawBoard g]
 
 drawStats :: PlayState -> Widget Name
-drawStats g = hLimit 5
+drawStats g = hLimit 20
   $ vBox [ drawScore (score g)
          , padTop (Pad 1) $ drawGameOver (result g)
          ]
