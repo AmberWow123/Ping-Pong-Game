@@ -54,9 +54,17 @@ drawBoard g = withBorderStyle BS.unicodeBold
     cellsInRow y = [drawCoord (x, y) | x <- [0..boardWidth-1]]
     drawCoord    = drawCell . cellAt
     cellAt (a, b)
-      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g)}  = Racket
-      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g)} = Racket
-      | Coord {x=fromIntegral a, y=fromIntegral b} == pos (ball g)                             = ViewBall
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g)}        = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g) + 1.0}  = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g) - 1.0}  = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g) + 2.0}  = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=5.0, y=fromIntegral (racket1 g) - 2.0}  = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g)}       = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) + 1.0} = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 1.0} = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) + 2.0} = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 2.0} = Racket
+      | Coord {x=fromIntegral a, y=fromIntegral b} == pos (ball g)                                     = ViewBall
       | otherwise         = Empty
 
 drawCell :: HitPlane -> Widget Name
@@ -68,7 +76,7 @@ cw :: Widget Name
 cw = str " "
 
 cb :: Widget Name
-cb = str "●"
+cb = str " "
 
 racketAttr, ballAttr, emptyAttr :: AttrName
 racketAttr = attrName "racketAttr"
