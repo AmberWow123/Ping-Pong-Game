@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveFunctor #-}
 module Model.Ball
   ( -- * Types
     Ball
@@ -19,28 +18,15 @@ import Control.Monad.IO.Class (MonadIO(liftIO))
 import Types
 import Model.Player
 
-
 -------------------------------------------------------------------------------
 -- | Ball ---------------------------------------------------------------------
 -------------------------------------------------------------------------------
-
-data Coord = Coord
-  { x :: Float 
-  , y :: Float
-  }
-  deriving (Eq, Ord)
 
 addc :: Coord -> Coord -> Coord
 addc a b = Coord{ x = (x a) + (x b), y = (y a) + (y b)}
 
 mulc :: Coord -> Float -> Coord
 mulc a c = Coord{ x = (x a) * c, y = (y a) * c}
-
-data Ball   = Ball
-  { pos   :: Coord -- ^ position of ball
-  , dir   :: Coord -- ^ direction of ball moving towards
-  , speed :: Float -- ^ speed * dir = actual move
-  }
 
 getIntPos :: Ball -> (Int,Int)
 getIntPos b = (round (x p), round (y p))
@@ -53,16 +39,6 @@ movement b = do
             let  s       = speed b
             b { pos = (p `addc` (v `mulc` s)) }
 
-data Turn
-  = P1
-  | P2
-  deriving (Eq, Show)
-
-data Plane
-  = X
-  | Y
-  deriving (Eq, Show)
-
 reflect :: Ball -> Plane -> Ball
 reflect b X = do 
     let v = dir b
@@ -73,13 +49,6 @@ reflect b Y = do
     let v = dir b
     let vy' = -1 * (y v)
     b { dir = Coord {x = x v, y = vy'} }
-
-
-data Result a
-  = Cont a
-  | Hit Plane
-  | Score Turn
-  deriving (Eq, Functor, Show)
 
 result :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
 result b p1 p2 = if (bx == 0) && (by > (p1+5)) || (by < (p1-5)) then Score P2

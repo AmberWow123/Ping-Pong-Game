@@ -1,8 +1,7 @@
 module Model.Score where
 
+import Types
 import Model.Ball
-
-type Score = (Int, Int)
 
 addScore :: Score -> Turn -> Either (Bool) (Score) -- ^ Left winner, Right current Score after increment
 addScore s t = let (s1,s2) = s in case t of
