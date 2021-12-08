@@ -1,7 +1,5 @@
 name:                ping-pong
 version:             0.1.0.0
-license:             MIT
-license-file:        LICENSE
 author:              Yuka Chu, Chi-Hsuan Lee, Yi-Ting Wang, Heidi Cheng
 maintainer:          y5chu@ucsd.edu, chl131@ucsd.edu, y9wang@ucsd.edu, h8cheng@ucsd.edu
 category:            Game
