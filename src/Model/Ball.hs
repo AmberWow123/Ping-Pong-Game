@@ -12,6 +12,7 @@ module Model.Ball
   , init
   , reflect
   , serveBall
+  
 
   )
   where
@@ -67,12 +68,12 @@ nextResult b p1 p2 = if (bx == 5) && (by <= fromIntegral (p1+2)) && (by >= fromI
 serveBall :: Turn -> Ball
 serveBall P1 = Ball
   { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
-  , dir   = Coord { x = -1, y = 0}
+  , dir   = Coord { x = -1, y = 1}
   , speed = 1
   }
 serveBall P2 = Ball
   { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
-  , dir   = Coord { x = 1, y = 0}
+  , dir   = Coord { x = 1, y = 1}
   , speed = 1
   }
 
