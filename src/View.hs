@@ -5,18 +5,9 @@ import qualified Brick.Widgets.Border.Style as BS
 import qualified Brick.Widgets.Center as C
 import qualified Graphics.Vty as V
 import Types
-import Brick
-  ( App(..), AttrMap, BrickEvent(..), EventM, Next, Widget
-  , customMain, neverShowCursor
-  , continue, halt
-  , hLimit, vLimit, vBox, hBox
-  , padRight, padLeft, padTop, padAll, Padding(..)
-  , withBorderStyle
-  , str
-  , attrMap, withAttr, emptyWidget, AttrName, on, fg
-  , (<+>)
-  , (<=>)
-  , attrName
+import Brick(
+  AttrMap, Widget, hLimit, vBox, hBox, padTop, padAll, Padding(..) ,withBorderStyle,
+  str, attrMap, withAttr, emptyWidget, AttrName, on, fg, (<=>), attrName
   )
 
 drawUI :: PlayState -> [Widget Name]
