@@ -9,6 +9,7 @@ import Brick(
   AttrMap, Widget, hLimit, vBox, hBox, padTop, padAll, Padding(..) ,withBorderStyle,
   str, attrMap, withAttr, emptyWidget, AttrName, on, fg, (<=>), attrName
   )
+import Model.Ball
 
 drawUI :: PlayState -> [Widget Name]
 drawUI g = [C.center $ padTop (Pad 2) (drawStats g) <=> drawBoard g]
@@ -55,7 +56,7 @@ drawBoard g = withBorderStyle BS.unicodeBold
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 1.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) + 2.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 2.0} = Racket
-      | Coord {x=fromIntegral a, y=fromIntegral b} == pos (ball g)                                     = ViewBall
+      | Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball g)                             = ViewBall
       | otherwise         = Empty
 
 drawCell :: HitPlane -> Widget Name

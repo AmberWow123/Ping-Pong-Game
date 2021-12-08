@@ -12,15 +12,18 @@ import qualified Model.Player as Player
 -- | Top-level App State ------------------------------------------------------
 -------------------------------------------------------------------------------
 
-init :: PlayState
-init = PS
+init :: IO PlayState
+init = do{
+   b <- Ball.init;
+  return PS
   { racket1 = Player.player1                  
   , racket2 = Player.player2                     
-  , ball    = Ball.init            
+  , ball    = b       
   , result  = Nothing          
   , turn    = P1                    
   , score   = (0, 0)                
   }
+}
 
 next :: PlayState -> Ball.Result Ball.Ball -> Either (Maybe Turn) PlayState
 next s (Cont b') = Right (s { ball = b' } )
