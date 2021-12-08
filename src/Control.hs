@@ -13,8 +13,8 @@ control s ev = case ev of
   AppEvent Tick                   -> nextS s (nextResult (ball s) (racket1 s) (racket2 s))
   T.VtyEvent (V.EvKey V.KUp   _)  -> Brick.continue (move1 up    s)
   T.VtyEvent (V.EvKey V.KDown _)  -> Brick.continue (move1 down  s)
-  T.VtyEvent (V.EvKey (V.KChar 'W') _)  -> Brick.continue (move2 up  s)
-  T.VtyEvent (V.EvKey (V.KChar 'S') _) -> Brick.continue (move2 down s)
+  T.VtyEvent (V.EvKey (V.KChar 'w') _)  -> Brick.continue (move2 up  s)
+  T.VtyEvent (V.EvKey (V.KChar 's') _) -> Brick.continue (move2 down s)
   T.VtyEvent (V.EvKey V.KEsc _)   -> Brick.halt s
   _                               -> Brick.continue s -- Brick.halt s
 -------------------------------------------------------------------------------
