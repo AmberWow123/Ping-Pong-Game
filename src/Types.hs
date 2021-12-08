@@ -45,6 +45,24 @@ data Result a
   deriving (Eq, Functor, Show)
 
 -------------------------------------------------------------------------------
+-- | Data for Model
+-------------------------------------------------------------------------------
+
+data State a 
+  = Intro 
+  | Play PlayState
+  | Outro 
+
+data PlayState = PS
+  { racket1 :: Racket      -- ^ racket on the left 
+  , racket2 :: Racket      -- ^ racket on the right
+  , ball    :: Ball        -- ^ properties of the ball
+  , result  :: Result      -- ^ game over flag
+  , turn    :: Turn        -- ^ one of the player score, do nextServe. If end -> restart game
+  , score   :: Score       -- ^ score
+  }
+
+-------------------------------------------------------------------------------
 -- | Data for Player
 -------------------------------------------------------------------------------
 type Racket = Int  -- ^ position of racket

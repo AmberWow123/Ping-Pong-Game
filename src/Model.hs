@@ -12,20 +12,6 @@ import qualified Model.Player as Player
 -- | Top-level App State ------------------------------------------------------
 -------------------------------------------------------------------------------
 
-data State 
-  = Intro 
-  | Play PlayState 
-  | Outro 
-
-data PlayState = PS
-  { racket1 :: Player.Racket   -- ^ racket on the left 
-  , racket2 :: Player.Racket   -- ^ racket on the right
-  , ball    :: Ball.Ball       -- ^ properties of the ball
-  , result  :: Ball.Result     -- ^ game over flag
-  , turn    :: Ball.Turn       -- ^ one of the player score, do nextServe. If end -> restart game
-  , score   :: Score.Score     -- ^ score
-  }
-
 init :: PlayState
 init = PS
   { racket1 = Player1                  
