@@ -19,6 +19,7 @@ module Model.Ball
 import Prelude hiding (init)
 import Control.Monad.IO.Class (MonadIO(liftIO))
 import Types
+import System.Random
 
 -------------------------------------------------------------------------------
 -- | Ball ---------------------------------------------------------------------
@@ -77,3 +78,20 @@ serveBall P2 = Ball
 
 init :: Ball
 init = serveBall P1
+
+serveRBall :: Turn -> IO Ball
+serveRBall P1 = do
+  i <- randomRIO(0,1)
+  j <- randomRIO(-1,1)
+  return Ball{ pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
+             , dir   = Coord { x = i, y = j}
+             , speed = 1
+  }
+serveRBall P2 = do
+  i <- randomRIO(-1,0)
+  j <- randomRIO(-1,1)
+  return Ball{ pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
+             , dir   = Coord { x = i, y = j}
+             , speed = 1
+  }
+
