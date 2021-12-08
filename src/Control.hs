@@ -3,6 +3,7 @@ module Control where
 
 import Types
 import Model.Ball
+import Model
 import Brick hiding (Result)
 import qualified Graphics.Vty as V
 import qualified Brick.Types as T
@@ -25,9 +26,9 @@ move2 :: (Int -> Int) -> PlayState -> PlayState
 move2 f s = s { racket2 = f (racket2 s) }
 
 up :: Int -> Int
-up r = min boardHeight r+5
+up r = min boardHeight (r+5)
 down :: Int -> Int
-down r = max boardHeight r-5
+down r = max boardHeight (r-5)
 
 -------------------------------------------------------------------------------
 nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
