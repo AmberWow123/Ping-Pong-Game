@@ -7,7 +7,7 @@ module Model.Ball
 
     -- * Ball API
   , getIntCoord
-  , result
+  , nextResult
   , init
   , reflect
   , serveBall
@@ -52,8 +52,8 @@ reflect b Y = do
     let vy' = -1 * (y v)
     b { dir = Coord {x = x v, y = vy'} }
 
-result :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
-result b p1 p2 = if (bx == 0) && (by > fromIntegral (p1+5)) || (by < fromIntegral (p1-5)) then Score P2
+nextResult :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
+nextResult b p1 p2 = if (bx == 0) && (by > fromIntegral (p1+5)) || (by < fromIntegral (p1-5)) then Score P2
                 else if (bx == fromIntegral boardWidth) && (by > fromIntegral (p2+5)) || (by < fromIntegral (p2-5)) then Score P1
                      else if bx == 0 || bx == fromIntegral boardWidth then Hit Y
                           else if by == 0 || by == fromIntegral boardHeight then Hit X

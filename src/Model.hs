@@ -14,10 +14,10 @@ import qualified Model.Player as Player
 
 init :: PlayState
 init = PS
-  { racket1 = Player1                  
-  , racket2 = Player2                     
+  { racket1 = Player.player1                  
+  , racket2 = Player.player2                     
   , ball    = Ball.init            
-  , result  = (Cont ball)           
+  , result  = (Cont ())           
   , turn    = P1                    
   , score   = (0, 0)                
   }

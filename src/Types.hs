@@ -57,7 +57,7 @@ data PlayState = PS
   { racket1 :: Racket      -- ^ racket on the left 
   , racket2 :: Racket      -- ^ racket on the right
   , ball    :: Ball        -- ^ properties of the ball
-  , result  :: Result      -- ^ game over flag
+  , result  :: Result ()   -- ^ game over flag
   , turn    :: Turn        -- ^ one of the player score, do nextServe. If end -> restart game
   , score   :: Score       -- ^ score
   }

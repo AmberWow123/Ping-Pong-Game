@@ -4,12 +4,9 @@ import Brick hiding (Result)
 import qualified Graphics.Vty as V
 import qualified Brick.Types as T
 
-import Model.Ball
-import Model
-
 control :: PlayState -> BrickEvent n Tick -> EventM n (Next PlayState)
 control s ev = case ev of 
-  AppEvent Tick                   -> nextS s (Ball.result (ball s) (racket1 s) (racket2 s))
+  AppEvent Tick                   -> nextS s (Ball.nextResult (ball s) (racket1 s) (racket2 s))
   T.VtyEvent (V.EvKey V.KUp   _)  -> Brick.continue (move1 up    s)
   T.VtyEvent (V.EvKey V.KDown _)  -> Brick.continue (move1 down  s)
   T.VtyEvent (V.EvKey (V.KChar 'W') _)  -> Brick.continue (move2 up  s)
@@ -30,7 +27,7 @@ down :: Int -> Int
 down r = max (boardHeight, r-5)
 
 -------------------------------------------------------------------------------
-nextS :: PlayState -> Result Board -> EventM n (Next PlayState)
+nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
 -------------------------------------------------------------------------------
 nextS s b = case next s b of
   Right s' -> continue s'
