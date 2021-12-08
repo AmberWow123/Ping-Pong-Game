@@ -7,6 +7,7 @@ import Model
 import Brick hiding (Result)
 import qualified Graphics.Vty as V
 import qualified Brick.Types as T
+import Control.Monad.IO.Class (MonadIO(liftIO))
 
 control :: PlayState -> BrickEvent n Tick -> EventM n (Next PlayState)
 control s ev = case ev of 
@@ -34,5 +35,5 @@ down r = max 2 (r-1)
 nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
 -------------------------------------------------------------------------------
 nextS s b = case next s b of
-  Right s' -> continue s'
+  Right s' -> continue =<< liftIO s'
   Left res -> halt (s { result = res }) 
