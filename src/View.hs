@@ -4,6 +4,7 @@ import qualified Brick.Widgets.Border as B
 import qualified Brick.Widgets.Border.Style as BS
 import qualified Brick.Widgets.Center as C
 import qualified Graphics.Vty as V
+import Types
 import Brick
   ( App(..), AttrMap, BrickEvent(..), EventM, Next, Widget
   , customMain, neverShowCursor
@@ -63,7 +64,7 @@ drawGrid g = withBorderStyle BS.unicodeBold
       | c == ball g        = Ball
       | otherwise          = Empty
 
-drawCell :: Plane -> Widget Name
+drawCell :: HitPlane -> Widget Name
 drawCell Racket = withAttr racketAttr cw
 drawCell Ball   = withAttr ballAttr cb
 drawCell Empty  = withAttr emptyAttr cw
