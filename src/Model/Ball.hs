@@ -18,7 +18,6 @@ module Model.Ball
 import Prelude hiding (init)
 import Control.Monad.IO.Class (MonadIO(liftIO))
 import Types
-import Model.Player
 
 -------------------------------------------------------------------------------
 -- | Ball ---------------------------------------------------------------------
@@ -66,15 +65,13 @@ serveBall :: Turn -> Ball
 serveBall P1 = Ball
   { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
   , dir   = Coord { x = -1, y = 0}
-  , speed = 0.1
+  , speed = 1
   }
 serveBall P2 = Ball
   { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
   , dir   = Coord { x = 1, y = 0}
-  , speed = 0.1
+  , speed = 1
   }
-
-isp = 0.1
 
 init :: Ball
 init = serveBall P1
