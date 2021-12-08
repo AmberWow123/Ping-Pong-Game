@@ -26,9 +26,9 @@ move2 :: (Int -> Int) -> PlayState -> PlayState
 move2 f s = s { racket2 = f (racket2 s) }
 
 up :: Int -> Int
-up r = min boardHeight (r+5)
+up r = min (boardHeight-2) (r+1)
 down :: Int -> Int
-down r = min boardHeight (r-5)
+down r = max 2 (r-1)
 
 -------------------------------------------------------------------------------
 nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
