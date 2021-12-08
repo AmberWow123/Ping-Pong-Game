@@ -24,7 +24,7 @@ init = PS
 
 next :: PlayState -> Ball.Result Ball.Ball -> Either (Maybe Turn) PlayState
 next s (Cont b') = Right (s { ball = b' } )
-next s (Hit pl) = Right (s { ball = Ball.reflect (ball s) pl })
+next s (Hit pl) = Right (s { ball = Ball.movement (Ball.reflect (ball s) pl) })
 next s (Score p) = case (Score.addScore (score s) p) of
                          Left winner -> Left (Just winner)
                          Right sc -> Right (s { ball = Ball.serveBall p, score = sc })

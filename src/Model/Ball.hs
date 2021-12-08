@@ -7,6 +7,7 @@ module Model.Ball
 
     -- * Ball API
   , getIntCoord
+  , movement
   , nextResult
   , init
   , reflect
@@ -37,7 +38,7 @@ movement :: Ball -> Ball
 movement b = do 
             let p = pos b
             let v = dir b
-            let  s       = speed b
+            let s = speed b
             b { pos = (p `addc` (v `mulc` s)) }
 
 reflect :: Ball -> Plane -> Ball
@@ -52,11 +53,11 @@ reflect b Y = do
     b { dir = Coord {x = x v, y = vy'} }
 
 nextResult :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
-nextResult b p1 p2 = if (bx == 5) && (by < fromIntegral (p1+2)) && (by > fromIntegral (p1-2)) then Hit Y
-                     else if (bx == fromIntegral boardWidth - 5) && (by < fromIntegral (p2+2)) && (by > fromIntegral (p2-2)) then Hit Y
+nextResult b p1 p2 = if (bx == 5) && (by <= fromIntegral (p1+2)) && (by >= fromIntegral (p1-2)) then Hit X
+                     else if (bx == fromIntegral boardWidth - 5) && (by <= fromIntegral (p2+2)) && (by >= fromIntegral (p2-2)) then Hit X
                           else if bx == 0 then Score P2
                                else if bx == fromIntegral boardWidth then Score P1
-                                    else if by == 0 || by == fromIntegral boardHeight then Hit X
+                                    else if by == 0 || by == fromIntegral boardHeight then Hit Y
                                          else Cont (movement b)
     where p   = pos b
           bx = x p
