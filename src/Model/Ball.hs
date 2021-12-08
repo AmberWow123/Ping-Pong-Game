@@ -9,15 +9,14 @@ module Model.Ball
     -- * Ball API
   , getIntPos
   , result
-  , next
-  , initBall
+  , init
 
   )
   where
 
 import Prelude hiding (init)
 import Control.Monad.IO.Class (MonadIO(liftIO))
-import Model
+import Types
 import Model.Player
 
 

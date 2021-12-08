@@ -3,14 +3,10 @@
 module Model where 
 
 import Prelude hiding ((!!))
+import Types
 import qualified Model.Ball   as Ball
 import qualified Model.Score  as Score
 import qualified Model.Player as Player
-
--------------------------------------------------------------------------------
--- | Ticks mark passing of time: a custom event that we constantly stream
--------------------------------------------------------------------------------
-data Tick = Tick
 
 -------------------------------------------------------------------------------
 -- | Top-level App State ------------------------------------------------------
@@ -20,9 +16,6 @@ data State
   = Intro 
   | Play PlayState 
   | Outro 
- 
-data Plane 
-  = Racket | Ball | Empty
 
 data PlayState = PS
   { racket1 :: Player.Racket   -- ^ racket on the left 
@@ -32,11 +25,6 @@ data PlayState = PS
   , turn    :: Ball.Turn       -- ^ one of the player score, do nextServe. If end -> restart game
   , score   :: Score.Score     -- ^ score
   }
-
-boardHeight, boardWidth, racketHeight :: Int
-boardHeight  = 40
-boardWidth   = 60
-racketHeight = 5
 
 init :: PlayState
 init = PS

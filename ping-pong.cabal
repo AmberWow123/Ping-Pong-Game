@@ -19,6 +19,7 @@ executable brick-ping-pong
   hs-source-dirs:      src
   other-modules:       View, 
                        Control,
+                       Types,
                        Model, 
                        Model.Ball,
                        Model.Score,

@@ -38,7 +38,7 @@ drawScore (p1_score, p2_score) = withBorderStyle BS.unicodeBold
 drawGameOver :: (Int, Int) -> Widget n
 drawGameOver (p1_result, p2_result) =
   if (p1_result + p2_result) > 0
-      if p1_result == 1:
+      if p1_result == 1
           then withAttr gameOverAttr $ C.hCenter $ str "PLAYER 1 WON"
           else withAttr gameOverAttr $ C.hCenter $ str "PLAYER 2 WON"
 
