@@ -36,4 +36,5 @@ nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
 -------------------------------------------------------------------------------
 nextS s b = case next s b of
   Right s' -> continue =<< liftIO s'
-  Left res -> halt (s { result = res }) 
+  Left res -> continue (s { result = res }) 
+  --Left res -> halt (s { result = res }) 
