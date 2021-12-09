@@ -77,8 +77,8 @@ serveBall P2 = Ball
   , speed = 1
   }
 
-init :: IO Ball
-init = serveRBall P1
+init :: Turn -> IO Ball
+init = serveRBall
 
 serveRBall :: Turn -> IO Ball
 serveRBall P1 = do
