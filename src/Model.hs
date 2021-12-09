@@ -39,9 +39,9 @@ initsc p sc p1 p2= do{
   }
 }
 
-next :: PlayState -> Ball.Result Ball.Ball -> Either (Maybe Turn) (IO PlayState)
+next :: PlayState -> Ball.Result Ball.Ball -> Either ((Maybe Turn),Score) (IO PlayState)
 next s (Cont b') = Right (return (s { ball = b' } ))
 next s (Hit pl) = Right (return (s { ball = Ball.movement (Ball.reflect (ball s) pl) }))
 next s (Score p) = case (Score.addScore (score s) p) of
-                         Left winner -> Left (Just winner)
+                         Left (winner, sc) -> Left ((Just winner), sc)
                          Right sc -> Right (initsc p sc (racket1 s) (racket2 s))
