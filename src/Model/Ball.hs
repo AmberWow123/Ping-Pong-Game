@@ -13,7 +13,7 @@ module Model.Ball
   , reflect
   , serveBall
   , serveRBall
-
+  , freeze
   )
   where
 
@@ -94,5 +94,13 @@ serveRBall P2 = do
   return Ball{ pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
              , dir   = Coord { x = i, y = j}
              , speed = 1
+  }
+
+freeze :: Ball
+freeze = Ball 
+  {
+    pos = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
+  , dir = Coord { x = 0, y = 0}
+  , speed = 0
   }
 

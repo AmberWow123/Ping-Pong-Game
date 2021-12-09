@@ -24,8 +24,8 @@ main = do
     threadDelay 100000 -- decides how fast your game moves
   let buildVty = V.mkVty V.defaultConfig
   initialVty <- buildVty
-  gs <- Model.init
-  res <- customMain initialVty buildVty (Just chan) app gs
+  modelInit <- Model.init
+  res <- customMain initialVty buildVty (Just chan) app modelInit
   print (result res, score res) 
 
 app :: App PlayState Tick Name
@@ -36,13 +36,3 @@ app = App
   , appStartEvent   = return
   , appAttrMap      = const theMap    -- (attrMap defAttr [])
   }
-
-getRounds :: IO (Maybe Int)
-getRounds = do
-  args <- getArgs
-  case args of
-    (str:_) -> return (readMaybe str)
-    _       -> return Nothing
-
-defaultRounds :: Int
-defaultRounds = 3
