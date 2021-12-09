@@ -14,7 +14,7 @@ import qualified Model.Player as Player
 
 init :: IO PlayState
 init = do{
-   b <- Ball.init;
+   b <- Ball.init P1;
   return PS
   { racket1 = Player.player1                  
   , racket2 = Player.player2                     
@@ -26,9 +26,9 @@ init = do{
 }
 
 
-initsc :: Score -> Racket -> Racket -> IO PlayState
-initsc sc p1 p2= do{
-   b <- Ball.init;
+initsc :: Turn -> Score -> Racket -> Racket -> IO PlayState
+initsc p sc p1 p2= do{
+   b <- Ball.init p;
   return PS
   { racket1 = p1                
   , racket2 = p2                     
@@ -44,4 +44,4 @@ next s (Cont b') = Right (return (s { ball = b' } ))
 next s (Hit pl) = Right (return (s { ball = Ball.movement (Ball.reflect (ball s) pl) }))
 next s (Score p) = case (Score.addScore (score s) p) of
                          Left winner -> Left (Just winner)
-                         Right sc -> Right (initsc sc (racket1 s) (racket2 s))
+                         Right sc -> Right (initsc p sc (racket1 s) (racket2 s))
