@@ -32,10 +32,11 @@ initsc1 s p sc@(sc1, sc2) = do
   b1 <- Ball.init p
   if ((sc1 == 3 && sc2 < 3) || (sc2 == 3 && sc1 < 3)) 
     then 
-      do{ 
-        b2 <- Ball.init p; 
-        return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }
-      }
+      if p == P1
+        then 
+          do{ b2 <- Ball.init P2; return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }}
+        else 
+          do{ b2 <- Ball.init P1;return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }}
     else return s { ball1 = b1, score = sc }
 
 
@@ -45,14 +46,14 @@ initsc2 s p sc = do{
   return s { ball2 = b2, score   = sc }
 }
 
-next :: PlayState -> Ball.Result Ball.Ball -> Ball.Result Ball.Ball -> Either (Maybe Turn) (IO PlayState)
+next :: PlayState -> Ball.Result Ball.Ball -> Ball.Result Ball.Ball -> Either ((Maybe Turn, Score)) (IO PlayState)
 next s (Cont b1') (Cont b2') = Right (return (s { ball1 = b1', ball2 = b2'} ))
 next s (Hit pl)   (Cont b2') = Right (return (s { ball1 = Ball.movement (Ball.reflect (ball1 s) pl), ball2 = b2' }))
 next s (Cont b1') (Hit pl)   = Right (return (s { ball1 = b1', ball2 = Ball.movement (Ball.reflect (ball2 s) pl)}))
 next s (Hit pl1)  (Hit pl2)  = Right (return (s { ball1 = Ball.movement (Ball.reflect (ball1 s) pl1), ball2 = Ball.movement (Ball.reflect (ball2 s) pl2)}))
 next s (Score p)  _          = case (Score.addScore (score s) p) of
-                                Left winner -> Left (Just winner)
+                                Left (winner, sc) -> Left ((Just winner), sc)
                                 Right sc -> Right (initsc1 s p sc)
 next s  _         (Score p)  = case (Score.addScore (score s) p) of
-                                Left winner -> Left (Just winner)
+                                Left (winner, sc) -> Left ((Just winner), sc)
                                 Right sc -> Right (initsc2 s p sc)

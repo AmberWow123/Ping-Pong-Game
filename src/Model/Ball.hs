@@ -82,14 +82,14 @@ init = serveRBall
 
 serveRBall :: Turn -> IO Ball
 serveRBall P1 = do
-  i <- randomRIO(0.5,1)
+  i <- randomRIO(-1,-0.5)
   j <- randomRIO(-1,1)
   return Ball{ pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
              , dir   = Coord { x = i, y = j}
              , speed = 1
   }
 serveRBall P2 = do
-  i <- randomRIO(-1,-0.5)
+  i <- randomRIO(0.5,1)
   j <- randomRIO(-1,1)
   return Ball{ pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
              , dir   = Coord { x = i, y = j}
