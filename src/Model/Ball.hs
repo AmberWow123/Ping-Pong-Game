@@ -11,7 +11,6 @@ module Model.Ball
   , nextResult
   , init
   , reflect
-  , serveBall
   , serveRBall
   , freeze
   )
@@ -64,18 +63,6 @@ nextResult b p1 p2 = if (bx == 5+1) && (by <= fromIntegral (p1+2)) && (by >= fro
     where p   = getIntCoord b
           bx = x p
           by = y p
-
-serveBall :: Turn -> Ball
-serveBall P1 = Ball
-  { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
-  , dir   = Coord { x = -1, y = 1}
-  , speed = 1
-  }
-serveBall P2 = Ball
-  { pos   = Coord { x = fromIntegral (boardWidth `div`2), y = fromIntegral (boardHeight `div` 2) }
-  , dir   = Coord { x = 1, y = 1}
-  , speed = 1
-  }
 
 init :: Turn -> IO Ball
 init = serveRBall
