@@ -5,7 +5,7 @@ Members: Yuka Chu, Chi-Hsuan Lee, Yi-Ting Wang, Heidi Cheng
 Link to Hackmd : https://hackmd.io/@heidiche/By63QCVvt
 
 ## Ping-Pong Game with a Twist
-![](https://i.imgur.com/o0QwnmI.gif)
+![](img/ponggamedemo.gif)
 ### Rules
 * Two-player ping pong game
 * Control vertical position of two rackets with keyboard (`w` and `s` for Player 1; `up` and `down` for Player 2)
