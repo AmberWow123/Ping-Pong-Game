@@ -63,7 +63,9 @@ drawBoard g = withBorderStyle BS.unicodeBold
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) + 2.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 2.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball1 g)                            = ViewBall1
+      | Coord {x=fromIntegral a+1, y=fromIntegral b} == getIntCoord (ball1 g)                          = ViewBall1
       | ((Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball2 g)) && (secondBall g))      = ViewBall2
+      | ((Coord {x=fromIntegral a+1, y=fromIntegral b} == getIntCoord (ball2 g)) && (secondBall g))    = ViewBall2
       | otherwise         = Empty
 
 drawCell :: HitPlane -> Widget Name

@@ -55,7 +55,7 @@ reflect b Y = do
     b { dir = Coord {x = x v, y = vy'} }
 
 nextResult :: Ball -> Racket -> Racket -> Result Ball -- ^ hit
-nextResult b p1 p2 = if (bx == 5) && (by <= fromIntegral (p1+2)) && (by >= fromIntegral (p1-2)) then Hit X
+nextResult b p1 p2 = if (bx == 5+1) && (by <= fromIntegral (p1+2)) && (by >= fromIntegral (p1-2)) then Hit X
                      else if (bx == fromIntegral boardWidth - 5) && (by <= fromIntegral (p2+2)) && (by >= fromIntegral (p2-2)) then Hit X
                           else if bx == 0 then Score P2
                                else if bx == fromIntegral boardWidth then Score P1
