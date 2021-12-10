@@ -11,7 +11,6 @@ executable brick-ping-pong
   main-is:             Main.hs
   build-depends:       base >=4.9, 
                        random >=1.1 && <1.2,
-                       containers,
                        vty, 
                        brick
   hs-source-dirs:      src
