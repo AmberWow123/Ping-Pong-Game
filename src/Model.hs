@@ -48,7 +48,7 @@ initsc2 s p sc = do{
   return s { ball2 = b2, score = sc }
 }
 
--- determine two balls are in the current state, hit the wall, or someone earns the point
+-- determine two balls are staying in the current state, hitting the wall, or someone is earning the point
 next :: PlayState -> Ball.Result Ball.Ball -> Ball.Result Ball.Ball -> Either ((Maybe Turn, Score)) (IO PlayState)
 next s (Cont b1') (Cont b2') = Right (return (s { ball1 = b1', ball2 = b2'} ))
 next s (Hit pl)   (Cont b2') = Right (return (s { ball1 = Ball.movement (Ball.reflect (ball1 s) pl), ball2 = b2' }))
