@@ -62,13 +62,15 @@ drawBoard g = withBorderStyle BS.unicodeBold
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 1.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) + 2.0} = Racket
       | Coord {x=fromIntegral a, y=fromIntegral b} == Coord {x=55.0, y=fromIntegral (racket2 g) - 2.0} = Racket
-      | Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball g)                             = ViewBall
+      | Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball1 g)                            = ViewBall1
+      | ((Coord {x=fromIntegral a, y=fromIntegral b} == getIntCoord (ball2 g)) && (secondBall g))      = ViewBall2
       | otherwise         = Empty
 
 drawCell :: HitPlane -> Widget Name
-drawCell Racket     = withAttr racketAttr cw
-drawCell ViewBall   = withAttr ballAttr cb
-drawCell Empty      = withAttr emptyAttr cw
+drawCell Racket      = withAttr racketAttr cw
+drawCell ViewBall1   = withAttr ball1Attr cb
+drawCell ViewBall2   = withAttr ball2Attr cb
+drawCell Empty       = withAttr emptyAttr cw
 
 -- output character of rackets and ball
 cw :: Widget Name
@@ -78,16 +80,18 @@ cb :: Widget Name
 cb = str " "
 
 -- AttrName of each item
-gameOverAttr, racketAttr, ballAttr, emptyAttr :: AttrName
+gameOverAttr, racketAttr, ball1Attr, ball2Attr, emptyAttr :: AttrName
 gameOverAttr = attrName "gameOver"
-racketAttr = attrName "racketAttr"
-ballAttr   = attrName "ballAttr"
-emptyAttr  = attrName "emptyAttr"
+racketAttr   = attrName "racketAttr"
+ball1Attr    = attrName "ball1Attr"
+ball2Attr    = attrName "ball2Attr"
+emptyAttr    = attrName "emptyAttr"
 
 -- set the color of each item
 theMap :: AttrMap
 theMap = attrMap V.defAttr
   [ (racketAttr, V.blue `on` V.blue)
-  , (ballAttr, V.red `on` V.red)
+  , (ball1Attr, V.red `on` V.red)
+  , (ball2Attr, V.green `on` V.green)
   , (gameOverAttr, fg V.red `V.withStyle` V.bold)
   ]

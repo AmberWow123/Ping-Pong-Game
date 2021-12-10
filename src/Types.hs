@@ -13,7 +13,8 @@ data Tick = Tick
 -------------------------------------------------------------------------------
 data HitPlane 
   = Racket
-  | ViewBall
+  | ViewBall1
+  | ViewBall2
   | Empty
 
 -------------------------------------------------------------------------------
@@ -23,7 +24,7 @@ data Coord = Coord
   { x :: Float 
   , y :: Float
   }
-  deriving (Eq, Ord)
+  deriving (Eq, Ord, Show)
 
 data Turn
   = P1
@@ -40,6 +41,7 @@ data Ball   = Ball
   , dir   :: Coord -- ^ direction of ball moving towards
   , speed :: Float -- ^ speed * dir = actual move
   }
+  deriving (Show)
 
 data Result a
   = Cont a
@@ -57,12 +59,14 @@ data State a
   | Outro 
 
 data PlayState = PS
-  { racket1 :: Racket      -- ^ racket on the left 
-  , racket2 :: Racket      -- ^ racket on the right
-  , ball    :: Ball        -- ^ properties of the ball
-  , result  :: Maybe Turn  -- ^ game over flag
-  , turn    :: Turn        -- ^ one of the player score, do nextServe. If end -> restart game
-  , score   :: Score       -- ^ score
+  { racket1     :: Racket      -- ^ racket on the left 
+  , racket2     :: Racket      -- ^ racket on the right
+  , ball1       :: Ball        -- ^ properties of the ball1
+  , ball2       :: Ball        -- ^ properties of the ball2
+  , result      :: Maybe Turn  -- ^ game over flag
+  , turn        :: Turn        -- ^ one of the player score, do nextServe. If end -> restart game
+  , score       :: Score       -- ^ score
+  , secondBall  :: Bool
   }
 
 -------------------------------------------------------------------------------

@@ -11,7 +11,7 @@ import Control.Monad.IO.Class (MonadIO(liftIO))
 
 control :: PlayState -> BrickEvent n Tick -> EventM n (Next PlayState)
 control s ev = case ev of 
-  AppEvent Tick                   -> nextS s (nextResult (ball s) (racket1 s) (racket2 s))
+  AppEvent Tick                   -> nextS s (nextResult (ball1 s) (racket1 s) (racket2 s)) (nextResult (ball2 s) (racket1 s) (racket2 s))
   T.VtyEvent (V.EvKey V.KUp   _)  -> Brick.continue (move2 up    s)
   T.VtyEvent (V.EvKey V.KDown _)  -> Brick.continue (move2 down  s)
   T.VtyEvent (V.EvKey (V.KChar 'w') _)  -> Brick.continue (move1 up  s)
@@ -32,9 +32,9 @@ down :: Int -> Int
 down r = max 2 (r-1)
 
 -------------------------------------------------------------------------------
-nextS :: PlayState -> Result Ball -> EventM n (Next PlayState)
+nextS :: PlayState -> Result Ball -> Result Ball -> EventM n (Next PlayState)
 -------------------------------------------------------------------------------
-nextS s b = case next s b of
+nextS s b1 b2 = case next s b1 b2 of
   Right s' -> continue =<< liftIO s'
   Left (res, sc) -> continue (s { result = res, score = sc}) 
   --Left res -> halt (s { result = res }) 
