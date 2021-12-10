@@ -36,14 +36,14 @@ initsc1 s p sc@(sc1, sc2) = do
         then 
           do{ b2 <- Ball.init P2; return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }}
         else 
-          do{ b2 <- Ball.init P1;return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }}
+          do{ b2 <- Ball.init P1; return s { ball1 = b1, ball2 = b2, score = sc, secondBall = True }}
     else return s { ball1 = b1, score = sc }
 
 
 initsc2 :: PlayState -> Turn -> Score -> IO PlayState
 initsc2 s p sc = do{
    b2 <- Ball.init p;
-  return s { ball2 = b2, score   = sc }
+  return s { ball2 = b2, score = sc }
 }
 
 next :: PlayState -> Ball.Result Ball.Ball -> Ball.Result Ball.Ball -> Either ((Maybe Turn, Score)) (IO PlayState)
