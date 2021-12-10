@@ -8,6 +8,7 @@ Link to Hackmd : https://hackmd.io/@heidiche/By63QCVvt
 <p align="center">
   <img src="./img/ponggamedemo.gif"/>
 </p>
+
 ### Rules
 * Two-player ping pong game
 * Control vertical position of two rackets with keyboard (`w` and `s` for Player 1; `up` and `down` for Player 2)
