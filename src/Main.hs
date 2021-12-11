@@ -1,19 +1,14 @@
 module Main where
 
 import Brick
-import Graphics.Vty.Attributes
 import qualified Graphics.Vty as V
 import Brick.BChan (newBChan, writeBChan)
 import Control.Monad (forever)
 import Control.Concurrent (threadDelay, forkIO)
-
 import Types
 import Model
 import View 
 import Control 
-import System.Environment (getArgs)
-import Text.Read (readMaybe)
-import Data.Maybe (fromMaybe)
 
 -------------------------------------------------------------------------------
 main :: IO ()

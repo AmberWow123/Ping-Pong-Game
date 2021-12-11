@@ -17,7 +17,6 @@ module Model.Ball
   where
 
 import Prelude hiding (init)
-import Control.Monad.IO.Class (MonadIO(liftIO))
 import Types
 import System.Random
 
