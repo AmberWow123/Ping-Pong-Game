@@ -5,7 +5,10 @@ Members: Yuka Chu, Chi-Hsuan Lee, Yi-Ting Wang, Heidi Cheng
 Link to Hackmd : https://hackmd.io/@heidiche/By63QCVvt
 
 ## Ping-Pong Game with a Twist
-![](https://i.imgur.com/o0QwnmI.gif)
+<p align="center">
+  <img src="./img/ponggamedemo.gif"/>
+</p>
+
 ### Rules
 * Two-player ping pong game
 * Control vertical position of two rackets with keyboard (`w` and `s` for Player 1; `up` and `down` for Player 2)
@@ -59,7 +62,9 @@ src
 
 ### Limitations
 1. Due to the nature of pixel games, it is inevitable that the ball moves discretely
-![](https://i.imgur.com/J26NxxX.png)
+<p align="center">
+  <img src="./img/ballmovement.png"/>
+</p>
 
 2. Both players have to press and release the keyboard to move.
    (when two players press to move at the same time, one player gets stuck)
